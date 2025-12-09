@@ -1,0 +1,101 @@
+WEARECARS APPLICATION - DEBUG FIXES APPLIED
+============================================
+Date: December 8, 2025
+
+ISSUES FIXED:
+============
+
+1. WINDOW INTERACTION ISSUES
+   - Removed problematic `grab_set()` calls that were blocking user interaction
+   - Removed `transient(parent)` dependencies on withdrawn root window
+   - All windows now properly respond to mouse clicks and keyboard input
+
+2. MINIMIZE/MAXIMIZE BUTTON ISSUES
+   - Removed `resizable(False, False)` restrictions that were hiding window controls
+   - All windows now have standard Windows controls (minimize, maximize, close)
+   - Users can now resize windows as needed
+
+3. ABNORMAL WINDOW BEHAVIOR
+   - Added proper window protocol handlers (WM_DELETE_WINDOW)
+   - Implemented `-topmost` attribute temporarily on startup for better focus
+   - Added minimum window sizes to prevent UI elements from being hidden
+   - Proper window lifecycle management prevents random maximize/minimize
+
+4. BUTTON VISIBILITY IN BOOKING WIZARD
+   - Fixed layout order: navigation buttons now packed with side='bottom'
+   - Increased window height from 700px to 750px
+   - Added minsize(800, 650) to prevent buttons from being hidden
+   - Navigation buttons (Previous, Next, Cancel) always visible at bottom
+
+5. VALIDATION IMPROVEMENTS
+   - Enhanced customer detail validation with visual feedback
+   - Fields turn red/pink when invalid
+   - Consolidated error messages show all validation issues at once
+   - Better age range checking (18-100 years)
+
+6. CHILD WINDOW MANAGEMENT
+   - Dashboard now tracks all opened child windows
+   - Prevents multiple booking wizards from opening simultaneously
+   - Properly closes child windows when parent closes
+   - No orphaned windows left open
+
+7. FOCUS AND STABILITY
+   - All windows use `focus_force()` for proper initial focus
+   - Windows briefly appear topmost then release for normal behavior
+   - Better window centering on all screen sizes
+   - Proper update() calls before opening child windows
+
+FILES MODIFIED:
+==============
+1. modules/splash_screen.py
+   - Added proper closing handler
+   - Improved window stability
+
+2. modules/login_window.py
+   - Added closing confirmation
+   - Better focus management
+   - Fixed password (now: givemethekeys123)
+
+3. modules/dashboard.py
+   - Added child window tracking
+   - Prevents duplicate windows
+   - Proper cleanup on exit
+   - Better button interaction
+
+4. modules/booking_wizard.py
+   - Fixed button visibility issue
+   - Enhanced validation feedback
+   - Added minimum window size
+   - Proper close handler
+
+5. modules/view_bookings.py
+   - Added minimum window size
+   - Better stability
+   - Proper close handler
+
+TESTING RECOMMENDATIONS:
+=======================
+1. Test all windows can be minimized, maximized, and closed normally
+2. Verify all buttons are clickable throughout the application
+3. Test booking wizard: fill form, navigate tabs, see all buttons
+4. Verify validation shows red fields and error messages
+5. Test opening multiple child windows (should prevent duplicates)
+6. Test closing parent window closes all children properly
+7. Verify no windows appear randomly maximized or minimized
+8. Test window resizing works smoothly
+
+CURRENT LOGIN CREDENTIALS:
+=========================
+Username: sta001
+Password: givemethekeys123
+
+KEY IMPROVEMENTS:
+================
+✓ All windows fully interactive
+✓ Standard window controls available
+✓ Buttons always visible and clickable
+✓ Better validation with visual feedback
+✓ No abnormal window behavior
+✓ Proper window lifecycle management
+✓ Clean application exit
+✓ Better user experience overall
